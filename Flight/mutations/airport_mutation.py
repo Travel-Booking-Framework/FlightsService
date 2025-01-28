@@ -129,11 +129,13 @@ class AirportType(DjangoObjectType):
     class Meta:
         model = Airport
 
+
 # Shared handler instance
 handler = AirportCommandHandler()
 
+
 # Define Mutation for Airport
-class Mutation(graphene.ObjectType):
+class AirportMutations(graphene.ObjectType):
     create_airport = graphene.Field(
         AirportType,
         airport_code=graphene.String(required=True),

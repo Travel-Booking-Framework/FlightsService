@@ -134,7 +134,7 @@ handler = AircraftCommandHandler()
 
 
 # GraphQL Mutations
-class Mutation(graphene.ObjectType):
+class AircraftMutations(graphene.ObjectType):
     create_aircraft = graphene.Field(
         AircraftType,
         aircraft_model=graphene.String(required=True),

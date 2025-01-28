@@ -136,7 +136,7 @@ handler = AirlineCommandHandler()
 
 
 # Define Mutation for Airline
-class Mutation(graphene.ObjectType):
+class AirlineMutations(graphene.ObjectType):
     create_airline = graphene.Field(
         AirlineType,
         airline_name=graphene.String(required=True),

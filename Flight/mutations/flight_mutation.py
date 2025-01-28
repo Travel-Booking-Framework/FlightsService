@@ -155,7 +155,7 @@ handler = FlightCommandHandler()
 
 
 # Define Mutation for Flight
-class Mutation(graphene.ObjectType):
+class FlightMutations(graphene.ObjectType):
     create_flight = graphene.Field(
         FlightType,
         flight_number=graphene.String(required=True),
