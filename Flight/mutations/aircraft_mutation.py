@@ -126,7 +126,7 @@ class AircraftCommandHandler:
 # GraphQL Type for Aircraft
 class AircraftType(DjangoObjectType):
     class Meta:
-        aircraft_model = Aircraft
+        model = Aircraft
 
 
 # Shared handler instance for managing Commands

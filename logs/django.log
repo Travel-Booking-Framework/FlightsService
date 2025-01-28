@@ -1,0 +1,22 @@
+[2025-01-28 10:00:10] INFO django.utils.autoreload Watching for file changes with StatReloader
+[2025-01-28 10:02:58] INFO django.utils.autoreload Watching for file changes with StatReloader
+[2025-01-28 10:03:42] INFO django.utils.autoreload Watching for file changes with StatReloader
+[2025-01-28 10:04:02] INFO django.utils.autoreload Watching for file changes with StatReloader
+[2025-01-28 10:04:05] INFO django.server "GET / HTTP/1.1" 302 0
+[2025-01-28 10:04:05] INFO django.server "GET /admin/ HTTP/1.1" 302 0
+[2025-01-28 10:04:06] INFO django.server "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3818
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin_persian/css/sahel.css HTTP/1.1" 200 303
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2804
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/css/responsive_rtl.css HTTP/1.1" 200 2544
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/css/rtl.css HTTP/1.1" 200 4696
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/css/base.css HTTP/1.1" 200 22092
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/css/login.css HTTP/1.1" 200 951
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/css/responsive.css HTTP/1.1" 200 17972
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin_persian/fonts/sahel/Sahel.woff HTTP/1.1" 200 45376
+[2025-01-28 10:04:06] WARNING django.request Not Found: /favicon.ico
+[2025-01-28 10:04:06] WARNING django.server "GET /favicon.ico HTTP/1.1" 404 2848
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+[2025-01-28 10:04:06] INFO django.server "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
