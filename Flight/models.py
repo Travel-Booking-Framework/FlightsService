@@ -62,6 +62,7 @@ class Flight(models.Model):
     discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # تخفیف به صورت درصد
     baggage_limit_kg = models.DecimalField(max_digits=10, decimal_places=2)  # میزان بار مجاز (کیلوگرم)
     flight_rules = models.TextField()  # قوانین و مقررات پرواز
+    final_price = models.DecimalField(max_digits=15, decimal_places=2, default=0)
 
     def __str__(self):
         return self.flight_number
@@ -72,12 +73,17 @@ class Flight(models.Model):
         return self.aircraft.aircraft_capacity
 
     @property
-    def final_price(self):
+    def final_price_calculated(self):
         """
-        Calculate Final Price with tax & discount
+        Calculate Final Price with tax & discount.
         """
-        # Calculate discounted price
         discounted_price = self.base_price * (1 - (self.discount / 100))
-        # Calculate final price with tax
         final_price = discounted_price * (1 + (self.tax / 100))
         return round(final_price)
+
+    def save(self, *args, **kwargs):
+        """
+        Automatically calculate final price before saving the instance.
+        """
+        self.final_price = self.final_price_calculated  # محاسبه و ذخیره `final_price` در دیتابیس
+        super().save(*args, **kwargs)
