@@ -20,3 +20,4 @@
 [2025-01-28 10:04:06] WARNING django.server "GET /favicon.ico HTTP/1.1" 404 2848
 [2025-01-28 10:04:06] INFO django.server "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
 [2025-01-28 10:04:06] INFO django.server "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+[2025-01-31 08:00:39] INFO django.utils.autoreload Watching for file changes with StatReloader
