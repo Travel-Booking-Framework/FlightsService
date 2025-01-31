@@ -62,7 +62,7 @@ class Flight(models.Model):
     discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # تخفیف به صورت درصد
     baggage_limit_kg = models.DecimalField(max_digits=10, decimal_places=2)  # میزان بار مجاز (کیلوگرم)
     flight_rules = models.TextField()  # قوانین و مقررات پرواز
-    final_price = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    final_price = models.BigIntegerField()
 
     def __str__(self):
         return self.flight_number
