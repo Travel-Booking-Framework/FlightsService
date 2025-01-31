@@ -5,58 +5,87 @@ from .documents import AirlineDocument, AirportDocument, AircraftDocument, Fligh
 
 
 # Signal for Airline model
-@receiver(post_save, sender=Airline)
-def update_airline_elasticsearch(sender, instance, created, **kwargs):
-    if created:
-        AirlineDocument().update(instance)
-    else:
-        AirlineDocument().update(instance)
+class AirlineSignalHandler:
+    @staticmethod
+    @receiver(post_save, sender=Airline)
+    def update_airline_elasticsearch(sender, instance, created, **kwargs):
+        """
+        When an Airline is created or updated, sync it with Elasticsearch.
+        """
+        if created:
+            AirlineDocument().update(instance)
+        else:
+            AirlineDocument().update(instance)
 
-
-@receiver(post_delete, sender=Airline)
-def delete_airline_elasticsearch(sender, instance, **kwargs):
-    AirlineDocument().delete(instance)
+    @staticmethod
+    @receiver(post_delete, sender=Airline)
+    def delete_airline_elasticsearch(sender, instance, **kwargs):
+        """
+        When an Airline is deleted, remove it from Elasticsearch.
+        """
+        AirlineDocument().delete(instance)
 
 
 # Signal for Airport model
-@receiver(post_save, sender=Airport)
-def update_airport_elasticsearch(sender, instance, created, **kwargs):
-    if created:
-        AirportDocument().update(instance)
-    else:
-        AirportDocument().update(instance)
+class AirportSignalHandler:
+    @staticmethod
+    @receiver(post_save, sender=Airport)
+    def update_airport_elasticsearch(sender, instance, created, **kwargs):
+        """
+        When an Airport is created or updated, sync it with Elasticsearch.
+        """
+        if created:
+            AirportDocument().update(instance)
+        else:
+            AirportDocument().update(instance)
 
-
-@receiver(post_delete, sender=Airport)
-def delete_airport_elasticsearch(sender, instance, **kwargs):
-    AirportDocument().delete(instance)
+    @staticmethod
+    @receiver(post_delete, sender=Airport)
+    def delete_airport_elasticsearch(sender, instance, **kwargs):
+        """
+        When an Airport is deleted, remove it from Elasticsearch.
+        """
+        AirportDocument().delete(instance)
 
 
 # Signal for Aircraft model
-@receiver(post_save, sender=Aircraft)
-def update_aircraft_elasticsearch(sender, instance, created, **kwargs):
-    if created:
-        AircraftDocument().update(instance)
-    else:
-        AircraftDocument().update(instance)
+class AircraftSignalHandler:
+    @staticmethod
+    @receiver(post_save, sender=Aircraft)
+    def update_aircraft_elasticsearch(sender, instance, created, **kwargs):
+        """
+        When an Aircraft is created or updated, sync it with Elasticsearch.
+        """
+        if created:
+            AircraftDocument().update(instance)
+        else:
+            AircraftDocument().update(instance)
+
+    @staticmethod
+    @receiver(post_delete, sender=Aircraft)
+    def delete_aircraft_elasticsearch(sender, instance, **kwargs):
+        """
+        When an Aircraft is deleted, remove it from Elasticsearch.
+        """
+        AircraftDocument().delete(instance)
 
 
-@receiver(post_delete, sender=Aircraft)
-def delete_aircraft_elasticsearch(sender, instance, **kwargs):
-    AircraftDocument().delete(instance)
+class FlightSignalHandler:
+    @staticmethod
+    @receiver(post_save, sender=Flight)
+    def update_flight_elasticsearch(sender, instance, created, **kwargs):
+        """
+        When a Flight is created or updated, sync it with Elasticsearch.
+        """
+        if created:
+            FlightDocument().update(instance)
+        else:
+            FlightDocument().update(instance)
 
-
-@receiver(post_save, sender=Flight)
-def update_elasticsearch_on_create_or_update(sender, instance, created, **kwargs):
-    if created:
-        # وقتی یک پرواز جدید ایجاد می‌شود، آن را در Elasticsearch ایندکس می‌کنیم
-        FlightDocument().update(instance)
-    else:
-        # وقتی اطلاعات پرواز به‌روزرسانی می‌شود، ایندکس آن را به‌روزرسانی می‌کنیم
-        FlightDocument().update(instance)
-
-
-@receiver(post_delete, sender=Flight)
-def delete_elasticsearch_on_delete(sender, instance, **kwargs):
-    # وقتی یک پرواز حذف می‌شود، آن را از Elasticsearch حذف می‌کنیم
-    FlightDocument().delete(instance)
+    @staticmethod
+    @receiver(post_delete, sender=Flight)
+    def delete_flight_elasticsearch(sender, instance, **kwargs):
+        """
+        When a Flight is deleted, remove it from Elasticsearch.
+        """
+        FlightDocument().delete(instance)
