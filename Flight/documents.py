@@ -75,6 +75,30 @@ class FlightDocument(Document):
     """
     Elasticsearch Document for Flight Model
     """
+    # Defining ObjectField for related models (Airport, Airline, Aircraft)
+    departure_airport = fields.ObjectField(properties={
+        'airport_name': fields.TextField(),
+        'airport_code': fields.KeywordField(),
+        'airport_city': fields.TextField(),
+    })
+
+    arrival_airport = fields.ObjectField(properties={
+        'airport_name': fields.TextField(),
+        'airport_code': fields.KeywordField(),
+        'airport_city': fields.TextField(),
+    })
+
+    airline = fields.ObjectField(properties={
+        'airline_name': fields.TextField(),
+        'airline_code': fields.KeywordField(),
+    })
+
+    aircraft = fields.ObjectField(properties={
+        'aircraft_model': fields.TextField(),
+        'aircraft_capacity': fields.IntegerField(),
+        'aircraft_manufacturer': fields.TextField(),
+    })
+
     class Index:
         name = 'flights'  # Index name in Elasticsearch
 
