@@ -9,7 +9,7 @@ This service is developed using **Django**, **PostgreSQL** and **Elasticsearch**
 
 - **Flights CUD**: Add, Update and Delete Flights Models with Command Pattern.
 - **Flights Simple Queries**: Filter flights by Simple Queries with Query Object Pattern.
-- **Flight Signals**: Sync PostgreSQL with Elasticsearch for FlightsFilter microservice.
+- **Flight Signals**: Sync PostgreSQL with Elasticsearch for FlightsService microservice.
 
 ## Prerequisites
 
@@ -23,8 +23,8 @@ This service is developed using **Django**, **PostgreSQL** and **Elasticsearch**
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/Travel-Booking-Framework/FlightsFilter.git
-   cd FlightsFilter
+   git clone https://github.com/Travel-Booking-Framework/FlightsService
+   cd FlightsService
    ```
 
 2. **Create and Activate a Virtual Environment**:
