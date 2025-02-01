@@ -1,4 +1,21 @@
 from django.db import models
+from enum import Enum
+
+
+class FlightType(Enum):
+    DOMESTIC = "Domestic"
+    INTERNATIONAL = "International"
+
+
+class TripType(Enum):
+    DIRECT = "Direct"
+    INDIRECT = "Indirect"
+
+
+class CabinType(Enum):
+    ECONOMY = "Economy"
+    BUSINESS = "Business Class"
+    FIRST = "First Class"
 
 
 class Airline(models.Model):
@@ -31,32 +48,25 @@ class Aircraft(models.Model):
 
 
 class Flight(models.Model):
-    FLIGHT_TYPES = [
-        ('domestic', 'Domestic'),
-        ('international', 'International'),
-    ]
-
-    TRIP_TYPES = [
-        ('direct', 'Direct'),
-        ('indirect', 'Indirect'),
-    ]
-
-    CABIN_TYPES = [
-        ('economy', 'Economy'),
-        ('business', 'Business Class'),
-        ('first', 'First Class'),
-    ]
-
+    cabin_type = models.CharField(
+        max_length=20,
+        choices=[(tag.name, tag.value) for tag in CabinType]
+    )
+    trip_type = models.CharField(
+        max_length=15,
+        choices=[(tag.name, tag.value) for tag in TripType]
+    )
+    flight_type = models.CharField(
+        max_length=15,
+        choices=[(tag.name, tag.value) for tag in FlightType]
+    )
     flight_number = models.CharField(max_length=50, unique=True)  # شماره پرواز
-    flight_type = models.CharField(max_length=15, choices=FLIGHT_TYPES)  # نوع پرواز (داخلی/خارجی)
-    trip_type = models.CharField(max_length=15, choices=TRIP_TYPES)  # نوع سفر (مستقیم/غیرمستقیم)
     departure_airport = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='departures')  # فرودگاه مبدا
     arrival_airport = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='arrivals')  # فرودگاه مقصد
     departure_datetime = models.DateTimeField()  # تاریخ و ساعت تیکاف
     arrival_datetime = models.DateTimeField()  # تاریخ و ساعت لندینگ
     airline = models.ForeignKey('Airline', on_delete=models.CASCADE)  # ایرلاین
     aircraft = models.ForeignKey('Aircraft', on_delete=models.CASCADE)  # هواپیما
-    cabin_type = models.CharField(max_length=20, choices=CABIN_TYPES)  # نوع کابین
     base_price = models.BigIntegerField()  # قیمت پایه
     tax = models.DecimalField(max_digits=5, decimal_places=2, default=0)  # مالیات به صورت درصد
     discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # تخفیف به صورت درصد
