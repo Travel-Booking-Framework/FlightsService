@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import sys
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_elasticsearch_dsl',
+    #'django_elasticsearch_dsl',
     'Flight',
 ]
 
@@ -89,11 +91,18 @@ DATABASES = {
     }
 }
 
-ELASTICSEARCH_DSL = {
-    'default': {
-        'hosts': ['localhost:9200'],
-    },
-}
+# if 'test' in sys.argv:
+#     ELASTICSEARCH_DSL = {
+#         'default': {
+#             'hosts': 'mock://localhost:9200'  # استفاده از mock برای جلوگیری از نیاز به Elasticsearch
+#         }
+#     }
+# else:
+#     ELASTICSEARCH_DSL = {
+#         'default': {
+#             'hosts': 'http://localhost:9200'
+#         }
+#     }
 
 
 # Password validation

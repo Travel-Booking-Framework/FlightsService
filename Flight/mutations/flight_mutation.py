@@ -136,14 +136,38 @@ class FlightCommandHandler:
         self.redo_stack.append(command)
 
     def redo(self):
-        # Redo the last undone operation
+        # بررسی اینکه آیا عملیاتی برای بازگردانی وجود دارد
         if not self.redo_stack:
             raise Exception("Nothing to redo.")
+
         command = self.redo_stack.pop()
-        command.execute()
+
+        # اگر دستور از نوع CreateFlightCommand باشد، باید آرگومان‌های ذخیره شده را ارسال کنیم
+        if isinstance(command, CreateFlightCommand):
+            self.undo_stack.append(command)
+            return command.execute(
+                flight_number=command.flight.flight_number,
+                flight_type=command.flight.flight_type,
+                trip_type=command.flight.trip_type,
+                departure_airport=command.flight.departure_airport,
+                arrival_airport=command.flight.arrival_airport,
+                departure_datetime=command.flight.departure_datetime,
+                arrival_datetime=command.flight.arrival_datetime,
+                airline=command.flight.airline,
+                aircraft=command.flight.aircraft,
+                cabin_type=command.flight.cabin_type,
+                base_price=command.flight.base_price,
+                tax=command.flight.tax,
+                discount=command.flight.discount,
+                baggage_limit_kg=command.flight.baggage_limit_kg,
+                flight_rules=command.flight.flight_rules
+            )
+
+        result = command.execute()
         self.undo_stack.append(command)
-        
-        
+        return result
+
+
 # Define GraphQL Type for Flight
 class FlightType(DjangoObjectType):
     class Meta:

@@ -115,12 +115,23 @@ class AircraftCommandHandler:
         self.redo_stack.append(command)
 
     def redo(self):
-        # Redo the last undone operation
         if not self.redo_stack:
             raise Exception("Nothing to redo.")
+
         command = self.redo_stack.pop()
-        command.execute()
+
+        # اضافه کردن آرگومان‌های مورد نیاز در صورت اجرای مجدد create
+        if isinstance(command, CreateAircraftCommand):
+            self.undo_stack.append(command)
+            return command.execute(
+                aircraft_model=command.aircraft.aircraft_model,
+                aircraft_capacity=command.aircraft.aircraft_capacity,
+                aircraft_manufacturer=command.aircraft.aircraft_manufacturer
+            )
+
+        result = command.execute()
         self.undo_stack.append(command)
+        return result
 
 
 # GraphQL Type for Aircraft

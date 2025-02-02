@@ -117,12 +117,23 @@ class AirlineCommandHandler:
         self.redo_stack.append(command)
 
     def redo(self):
-        # Redo the last undone operation
         if not self.redo_stack:
             raise Exception("Nothing to redo.")
+
         command = self.redo_stack.pop()
-        command.execute()
+
+        if isinstance(command, CreateAirlineCommand):
+            self.undo_stack.append(command)
+            return command.execute(
+                airline_name=command.airline.airline_name,
+                airline_code=command.airline.airline_code,
+                airline_rules=command.airline.airline_rules,
+                airline_logo=command.airline.airline_logo
+            )
+
+        result = command.execute()
         self.undo_stack.append(command)
+        return result
         
         
 # Define GraphQL Type for Airline

@@ -119,11 +119,24 @@ class AirportCommandHandler:
         # Redo the last undone operation
         if not self.redo_stack:
             raise Exception("Nothing to redo.")
+
         command = self.redo_stack.pop()
-        command.execute()
+
+        # اگر دستور از نوع ایجاد باشد، باید مقادیر قبلی را پاس دهیم
+        if isinstance(command, CreateAirportCommand):
+            self.undo_stack.append(command)
+            return command.execute(
+                airport_code=command.airport.airport_code,
+                airport_name=command.airport.airport_name,
+                airport_city=command.airport.airport_city,
+                airport_country=command.airport.airport_country
+            )
+
+        result = command.execute()
         self.undo_stack.append(command)
-        
-        
+        return result
+
+
 # Define GraphQL Type for Airport
 class AirportType(DjangoObjectType):
     class Meta:
